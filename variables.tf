@@ -5,7 +5,7 @@ variable "nats_namespace" {
 
 variable "nats_image" {
   description = "The nats-io image"
-  default     = "nats:v2.10.16"
+  default     = "nats:2.10.16"
 }
 
 variable "image_pull_policy" {
