@@ -196,6 +196,7 @@ resource "kubernetes_config_map" "nats_server" {
 
   data = {
     "nats.conf" = <<-NATSCONF
+      server_name: nats-server 
       pid_file: "/var/run/nats/nats.pid"
       http: 8222
       cluster {
