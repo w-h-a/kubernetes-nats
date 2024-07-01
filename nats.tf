@@ -211,8 +211,8 @@ resource "kubernetes_config_map" "nats_server" {
         connect_retries: 30
       }
       jetstream {
-        max_memory_store: 536870912
-        max_file_store: 1073741824
+        max_memory_store: 1Gb
+        max_file_store: 1Gb
       }
     NATSCONF
   }
