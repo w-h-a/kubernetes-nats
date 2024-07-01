@@ -92,6 +92,7 @@ resource "kubernetes_stateful_set" "nats" {
 
           command = [
             "nats-server",
+            "--jetstream",
             "--config",
             "/etc/nats-config/nats.conf"
           ]
@@ -198,6 +199,7 @@ resource "kubernetes_config_map" "nats_server" {
       pid_file: "/var/run/nats/nats.pid"
       http: 8222
       cluster {
+        name: nats-cluster
         port: 6222
         routes [
           nats://nats-0.nats.${var.nats_namespace}.svc:6222
@@ -206,6 +208,10 @@ resource "kubernetes_config_map" "nats_server" {
         ]
         cluster_advertise: $CLUSTER_ADVERTISE
         connect_retries: 30
+      }
+      jetstream {
+        max_memory_store: 536870912
+        max_file_store: 1073741824
       }
     NATSCONF
   }
